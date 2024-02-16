@@ -35,7 +35,7 @@ This Plex Stack includes the following services:
 
    ```bash
    git clone https://github.com/DonMcD/ultimate-plex-stack.git
-2. Fill in the required details in the details such as the environment variables
+2. Fill in the required details such as the environment variables
 3. OPTIONAL: Setup a reverse proxy so you can use radarr.my-domain.com instead of 192.168.1.10 to access each of your apps
 
 ## Example of Environment variables in Portainer
