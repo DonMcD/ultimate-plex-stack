@@ -23,7 +23,7 @@ This Plex Stack includes the following services:
 ## Dependencies
 
 1. Linux
-2. Docker
+2. Docker / Docker Compose
 
 ## How to Use
 
