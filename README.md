@@ -20,10 +20,14 @@ This Plex Stack includes the following services:
 - **Bazarr:** Subtitle management for movies and TV shows.
 - **Autobrr:** Used to grab torrents immediately as they are released
 
+<img width="752" alt="image" src="https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/db92a48a-fcc9-4c78-9053-9191b9316902">
+
+
 ## Dependencies
 
 1. Linux
 2. Docker / Docker Compose
+3. OPTIONAL: Portainer - Docker GUI
 
 ## How to Use
 
@@ -33,3 +37,12 @@ This Plex Stack includes the following services:
    git clone https://github.com/DonMcD/ultimate-plex-stack.git
 2. Fill in the required details in the details such as the environment variables
 3. OPTIONAL: Setup a reverse proxy so you can use radarr.my-domain.com instead of 192.168.1.10 to access each of your apps
+
+## Example of Environment variables in Portainer
+<img width="711" alt="image" src="https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/90f740a5-09d8-44b6-8ceb-bc073cba4899">
+
+## Possible Additions
+
+1. Organizr - Creates a lovely dashboard to help navigate to all of your apps
+2. Portainer - Docker GUI
+
