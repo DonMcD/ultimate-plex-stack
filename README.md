@@ -27,7 +27,7 @@ This Plex Stack includes the following services:
 
 ## How to Use
 
-1. Clone this repository:
+1. Clone this repository / Copy the docker-compose.yml file:
 
    ```bash
    git clone https://github.com/DonMcD/ultimate-plex-stack.git
