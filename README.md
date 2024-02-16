@@ -45,4 +45,5 @@ This Plex Stack includes the following services:
 
 1. Organizr - Creates a lovely dashboard to help navigate to all of your apps
 2. Portainer - Docker GUI
+3. UptimeKuma - Gives you the ability to monitor your services
 
