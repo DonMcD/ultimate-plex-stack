@@ -33,7 +33,7 @@ services:
       - PGID=${USER_ID}
       - TZ=${TZ}
       - VERSION=docker
-      - PLEX_CLAIM=claim-JYFJ19NaVW-uqgWpSyyw
+      - PLEX_CLAIM=claim-JYFJ29NaPW-uqgWpSyyw
     ports:
       - 32400:32400
     devices:
