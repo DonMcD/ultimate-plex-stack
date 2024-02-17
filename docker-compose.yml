@@ -78,6 +78,37 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+  
+  #Readarr - Used to download books
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${USER_ID}
+      - TZ=${TZ}
+    volumes:
+      - ${BASE_PATH}/readarr/config:/config
+      - ${UNRAID_SHARE}:/share 
+
+    ports:
+      - 8787:8787
+    restart: unless-stopped
+    
+  #Lidarr - Used to download music 
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${USER_ID}
+      - TZ=${TZ}
+    volumes:
+      - ${BASE_PATH}/lidarr/config:/config
+      - ${UNRAID_SHARE}:/share 
+    ports:
+      - 8686:8686
+    restart: unless-stopped
     
   #Prowlarr - manages your Sonarr, Radarr and download client
   prowlarr:
@@ -124,6 +155,20 @@ services:
     #  - proxy
     ports:
       - 5055:5055
+    restart: unless-stopped
+    
+  #Flaresolerr - Used as a proxy server to bypass Cloudflare and DDoS-GUARD protection.
+  flaresolverr:
+    # DockerHub mirror flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=${TZ}
+    ports:
+      - 8191:8191
     restart: unless-stopped
     
   #Gluetun - vpn container
