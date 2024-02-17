@@ -1,4 +1,5 @@
 # Welcome to my Ultimate Plex Stack!
+
 # I was hoping this could maybe help some people out when setting up their stack
 #
 # Environment Variable Examples:
@@ -33,7 +34,7 @@ services:
       - PGID=${USER_ID}
       - TZ=${TZ}
       - VERSION=docker
-      - PLEX_CLAIM=claim-JYFJ29NaPW-uqgWpSyyw
+      - PLEX_CLAIM=${PLEX_CLAIM}
     ports:
       - 32400:32400
     devices:
@@ -99,10 +100,10 @@ services:
     container_name: autobrr
     image: ghcr.io/autobrr/autobrr:latest
     restart: unless-stopped
-
-    user: 0:0
     environment:
       - TZ=${TZ}
+      - PUID=${USER_ID}
+      - PGID=${USER_ID}
     volumes:
       - ${BASE_PATH}/autobrr/config:/config
     ports:
@@ -152,8 +153,8 @@ services:
       - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY} #Example IE4cdRxZzoy/HvlLXVLB.2Hy@d=
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES} #Example 101.14.14.28/32
       - SERVER_HOSTNAMES=${SERVER_HOSTNAMES} #Example vpn.airdns.org
-      - SERVER_NAMES=Dalim 
-      - SERVER_CITIES=Alblasserdam 
+      - SERVER_NAMES=${VPN_SERVER_NAMES} #Example Dallim
+      - SERVER_CITIES=${VPN_SERVER_CITIES} #Example Albasserdonia
       - FIREWALL_VPN_INPUT_PORTS=${FIREWALL_VPN_INPUT_PORTS} #Example 8926 - Used for port forwarding
       
   #Qbittorent - torrenting software
@@ -269,6 +270,19 @@ services:
       - ${UNRAID_SHARE}:/share
     ports:
       - 6767:6767
+      
+  #Plex Auto Languages - This switchs languages automatically example: watching english show and non english speaks you get subtitle lol
+  plexautolanguages:
+    image: remirigal/plex-auto-languages:latest
+    container_name: plex-auto-languages
+    environment:
+      - PLEX_URL=${PLEX_URL} #This is your local URl example: http://192.168.1.10:32400
+      #To find your plex token go to https://app.plex.tv/, go to your library, click on the 3 dots on the bottom right of one of your tv/movie posters
+      #Then click "View XML" in the bottom right of that popup, look at the URL of the XML window and find your X-Plex-Token= in the URL (at the very end)
+      - PLEX_TOKEN=${PLEX_TOKEN}
+      - TZ=${TZ}
+    volumes:
+      - ${BASE_PATH}/pal/config:/config
       
   #Cross Seed - used to take torrents from one tracker and seed them on another without leeching first. Increases ratio
   #
