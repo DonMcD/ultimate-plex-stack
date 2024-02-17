@@ -362,3 +362,12 @@ services:
       
     restart: unless-stopped
     
+  #Wizarr - Allows you to create a share link that you can send to users to invite them to your media server
+  wizarr:
+    container_name: wizarr
+    image: ghcr.io/wizarrrr/wizarr:latest
+    ports:
+      - 5690:5690
+    volumes:
+      - ${BASE_PATH}/wizarr/data/database:/data/database
+ 
