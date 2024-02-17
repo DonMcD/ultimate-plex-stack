@@ -19,6 +19,9 @@ This Plex Stack includes the following services:
 - **Tautulli:** Analytics and monitoring for Plex.
 - **Bazarr:** Subtitle management for movies and TV shows.
 - **Autobrr:** Used to grab torrents immediately as they are released
+- **Readarr:** Used to grab books and audiobooks
+- **Lidarr:** Used to grab music
+- **Flaresolverr:** Used as a proxy server to bypass Cloudflare and DDoS-GUARD protection.
 
 <img width="752" alt="image" src="https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/db92a48a-fcc9-4c78-9053-9191b9316902">
 
