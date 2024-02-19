@@ -187,8 +187,8 @@ services:
       - 8388:8388/udp # Shadowsocks
       - 8080:8080 #Qbittorent Web UI
       - 8081:8081 #Qbittorent Web UI
-      - 6881:6881
-      - 6881:6881/udp
+      - 8694:8694
+      - 8694:8694/udp
     volumes:
       - ${BASE_PATH}/gluetun:/gluetun
     environment:
@@ -216,6 +216,7 @@ services:
       - PGID=${USER_ID}
       - TZ=${TZ}
       - WEBUI_PORT=8080
+      - TORRENTING_PORT=8694
     healthcheck: # https://github.com/qdm12/gluetun/issues/641#issuecomment-933856220
       test: "curl -sf https://1.1.1.1/  || exit 1"
       interval: 1m
@@ -370,4 +371,13 @@ services:
       - 5690:5690
     volumes:
       - ${BASE_PATH}/wizarr/data/database:/data/database
+      
+  #Dozzle - Used to easily view logs of any container in real time!    
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
  
