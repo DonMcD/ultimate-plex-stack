@@ -48,6 +48,21 @@ This Plex Stack includes the following services:
 ## Example of Environment variables in Portainer
 <img width="657" alt="image" src="https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/9a614eb0-8ff7-4eb9-b154-61c08cd595e9">
 
+File location examples:
+- {UNRAID_SHARE} = /share
+- {BASE_PATH} = /home/username/docker
+
+To allow hardlinking to work (which you will definitely want!) you will have to use the same root folder in all of your containers. In this example we use "/share"  
+
+An example of my folder structure:  
+![image](https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/2003ac26-a929-4ff6-ad67-e35fc51fb51a)
+
+  
+1. In Radarr you will want to set your category to "movies", this will create the movies folder
+2. In Sonarr you will want to set your category to "tv", this will create the tv folder
+
+  
+Anytime you reference your media folder in a container you want the path to look like /share/media/tv instead of /tv like a lot of the default guide says, if you do end up mapping the path as /tv hardlinking will not work
 
 ## Possible Additions
 
