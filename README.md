@@ -66,7 +66,7 @@ An example of my folder structure:
 2. In Sonarr you will want to set your category to "tv", this will create the tv folder
 
   
-Anytime you reference your media folder in a container you want the path to look like /share/media/tv instead of /tv like a lot of the default guide says, if you do end up mapping the path as /tv hardlinking will not work
+Anytime you reference your media folder in a container you want the path to look like /share/media/tv instead of /tv like a lot of the default guides say, if you do end up mapping the path as /tv hardlinking will not work
 
 ## Possible Additions
 
