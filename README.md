@@ -46,6 +46,7 @@ This Plex Stack includes the following services:
 3. OPTIONAL: Setup a reverse proxy so you can use radarr.my-domain.com instead of 192.168.1.10 to access each of your apps
 
 ## Example of Environment variables in Portainer
+Keep in mind some variable names have changed since this screenshot was taken
 <img width="657" alt="image" src="https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/9a614eb0-8ff7-4eb9-b154-61c08cd595e9">
 
   
