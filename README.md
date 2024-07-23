@@ -51,7 +51,7 @@ Keep in mind some variable names have changed since this screenshot was taken
 
   
 File location examples:
-- {UNRAID_SHARE} = /share
+- {MEDIA_SHARE} = /share
 - {BASE_PATH} = /home/username/docker
 
 To allow hardlinking to work (which you will definitely want!) you will have to use the same root folder in all of your container path. In this example we use "/share", so in the container it will look like "/share/downloads/tv"
