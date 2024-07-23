@@ -3,21 +3,22 @@
 # I was hoping this could maybe help some people out when setting up their stack
 #
 # Environment Variable Examples:
-# USER_ID = 1000
+# PUID = 99
+# GUID = 101
 # TZ = America/Edmonton
 # BASE_PATH = /home/username/docker
 #
 # https://trash-guides.info/Hardlinks/Hardlinks-and-Instant-Moves/ # This can be useful for establishing how the media will be presented below
-# UNRAID_SHARE = /mnt/media   # This can also be renamed to "SHARE" or "MEDIA" this is where you will present your media
+# MEDIA_SHARE = /mnt/media   # This can also be renamed to "SHARE" or "MEDIA" this is where you will present your media
 #
 # NOTE: This is not a plug and play solution, some research / customization will be required to make this work as intented
 # Feel free to customize ie: remove/change/add containers as needed - one size does not fit all
 
 ---
-version: "2.1"
+version: "3.0"
 
 networks: #This is used if you have a reverse proxy. I use Nginx Proxy Manager but anything will do
-  proxy:
+  proxy: #You can remove this block if you are not planning to use a vpn
     external:
       name: proxy
       
@@ -30,8 +31,8 @@ services:
     container_name: plex
     network_mode: host
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
       - TZ=${TZ}
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
@@ -41,8 +42,8 @@ services:
      - /dev/dri:/dev/dri #Required for plex HW transcoding / QuickSync
     volumes:
       - ${BASE_PATH}/plex/config:/config
-      - ${UNRAID_SHARE}/media/tv:/tv
-      - ${UNRAID_SHARE}/media/movies:/movies
+      - ${MEDIA_SHARE}/media/tv:/tv
+      - ${MEDIA_SHARE}/media/movies:/movies
     restart: unless-stopped
     
   #Radarr - used to find movies automatically
@@ -50,12 +51,12 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/radarr/config:/config
-      - ${UNRAID_SHARE}:/share #Access to the entire share
+      - ${MEDIA_SHARE}:/share #Access to the entire share
     #networks: #Does not connect to overseer if you use NPM
     #  - proxy
     ports:
@@ -67,12 +68,12 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/sonarr/config:/config
-      - ${UNRAID_SHARE}:/share #Access to the entire share
+      - ${MEDIA_SHARE}:/share #Access to the entire share
     #networks: #Does not connect to overseer if you use NPM
     #  - proxy
     ports:
@@ -84,12 +85,12 @@ services:
     image: lscr.io/linuxserver/readarr:develop
     container_name: readarr
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/readarr/config:/config
-      - ${UNRAID_SHARE}:/share 
+      - ${MEDIA_SHARE}:/share 
 
     ports:
       - 8787:8787
@@ -100,12 +101,12 @@ services:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/lidarr/config:/config
-      - ${UNRAID_SHARE}:/share 
+      - ${MEDIA_SHARE}:/share 
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -115,8 +116,8 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/prowlarr/config:/config
@@ -133,8 +134,8 @@ services:
     restart: unless-stopped
     environment:
       - TZ=${TZ}
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
     volumes:
       - ${BASE_PATH}/autobrr/config:/config
     ports:
@@ -145,12 +146,12 @@ services:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/overseer/config:/config
-      - ${UNRAID_SHARE}:/share #Access to the entire share
+      - ${MEDIA_SHARE}:/share #Access to the entire share
     #networks:
     #  - proxy
     ports:
@@ -170,84 +171,31 @@ services:
     ports:
       - 8191:8191
     restart: unless-stopped
-    
-  #Gluetun - vpn container
-  gluetun: #Setup for this container will be different depending on your VPN of choice
-    image: qmcgaw/gluetun
-    container_name: gluetun
-    # line above must be uncommented to allow external containers to connect.
-    # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-container-to-gluetun.md#external-container-to-gluetun
-    cap_add:
-      - NET_ADMIN
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    ports:
-      - 8888:8888/tcp # HTTP proxy
-      - 8388:8388/tcp # Shadowsocks
-      - 8388:8388/udp # Shadowsocks
-      - 8080:8080 #Qbittorent Web UI
-      - 8081:8081 #Qbittorent Web UI
-      - 8694:8694
-      - 8694:8694/udp
-    volumes:
-      - ${BASE_PATH}/gluetun:/gluetun
-    environment:
-      - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER} # Example airvpn
-      - VPN_TYPE=wireguard #Wireguard is generally faster than OpenVPN
-      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY} #Example IE4cdRxZzoy/HvlLXVLB.2Hy@d=
-      - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY} #Example IE4cdRxZzoy/HvlLXVLB.2Hy@d=
-      - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES} #Example 101.14.14.28/32
-      - SERVER_HOSTNAMES=${SERVER_HOSTNAMES} #Example vpn.airdns.org
-      - SERVER_NAMES=${VPN_SERVER_NAMES} #Example Dallim
-      - SERVER_CITIES=${VPN_SERVER_CITIES} #Example Albasserdonia
-      - FIREWALL_VPN_INPUT_PORTS=${FIREWALL_VPN_INPUT_PORTS} #Example 8926 - Used for port forwarding
       
   #Qbittorent - torrenting software
   #
   #You can also use RuTorrent, Transmisson or Deluge
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
-    network_mode: "service:gluetun"
     container_name: qbittorrent
-    labels:
-      - deunhealth.restart.on.unhealthy=true
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
       - TZ=${TZ}
       - WEBUI_PORT=8080
-      - TORRENTING_PORT=8694
-    healthcheck: # https://github.com/qdm12/gluetun/issues/641#issuecomment-933856220
-      test: "curl -sf https://1.1.1.1/  || exit 1"
-      interval: 1m
-      timeout: 10s
-      retries: 1
+      - TORRENTING_PORT=8694 #Make sure to port forward this port in your router so you can seed more effectively
     volumes:
       - ${BASE_PATH}/qbittorent/config:/config
-      - ${UNRAID_SHARE}:/share
+      - ${MEDIA_SHARE}:/share
     restart: unless-stopped
-    
-  #De-unhealth - used to restart qbitorrent if gluetun VPN tunnel ever drops
-  deunhealth:
-    build: .
-    image: qmcgaw/deunhealth
-    container_name: deunhealth
-
-    environment:
-      - LOG_LEVEL=info
-      - HEALTH_SERVER_ADDRESS=127.0.0.1:9999
-      - TZ=${TZ}
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
       
   #Tautulli - for plex statistics. Very useful when troubleshooting performance issues
   tautulli:
     image: lscr.io/linuxserver/tautulli:latest
     container_name: tautulli
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/tautulli:/config
@@ -269,8 +217,8 @@ services:
       - 8266:8266 # server port
     environment:
       - TZ=${TZ}
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
       - UMASK_SET=002
       - nodeName=ServerNode
       - serverIP=0.0.0.0
@@ -283,7 +231,7 @@ services:
       - ${BASE_PATH}/tdarr/server:/app/server
       - ${BASE_PATH}/tdarr/configs:/app/configs
       - ${BASE_PATH}/tdarr/logs:/app/logs
-      - ${UNRAID_SHARE}:/media
+      - ${MEDIA_SHARE}:/media
       - /transcode_cache:/temp
     devices:
      - /dev/dri:/dev/dri #Required for HW transcoding / QuickSync
@@ -308,12 +256,12 @@ services:
     image: lscr.io/linuxserver/bazarr:latest
     restart: unless-stopped
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${GUID}
+      - PGID=${GUID}
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/bazarr/config:/config
-      - ${UNRAID_SHARE}:/share
+      - ${MEDIA_SHARE}:/share
     ports:
       - 6767:6767
       
@@ -337,15 +285,15 @@ services:
     image: ghcr.io/cross-seed/cross-seed
     container_name: cross-seed
     environment:
-      - PUID=${USER_ID}
-      - PGID=${USER_ID}
+      - PUID=${PUID}
+      - PGID=${GUID}
     ports:
       - "2468:2468" # you'll need this for daemon mode only
     volumes:
       - ${BASE_PATH}/cross-seed/config:/config #To configure you have to manually nano the config file
       - ${BASE_PATH}/qbittorent/config/qBittorrent/BT_backup:/torrents:ro # your torrent clients .torrent cache, can and should be mounted read-only (e.g. qbit: `BT_Backup` | deluge: `state` | transmission: `transmission/torrents` | rtorrent: session dir from `.rtorrent.rc`)
-      - ${UNRAID_SHARE}/cross-seed/current-cross-seeds:/cross-seeds # A place to temp save current cross seed .torrent files
-      #- ${UNRAID_SHARE}/downloads:/data # OPTIONAL!!! this is dataDir path (for data-based matching) - will need to replicate your torrent client's container path (like Arr's do)
+      - ${MEDIA_SHARE}/cross-seed/current-cross-seeds:/cross-seeds # A place to temp save current cross seed .torrent files
+      #- ${MEDIA_SHARE}/downloads:/data # OPTIONAL!!! this is dataDir path (for data-based matching) - will need to replicate your torrent client's container path (like Arr's do)
     command: daemon # this enables the search mode, change to daemon to specifically run the daemon
     
   #Plex Meta Manager - used to create collections in plex. Example: "Most Popular Movies This Week", "Best of horror", etc.
@@ -389,10 +337,10 @@ services:
     volumes:
       # You need at least this one volume mapped so Unpackerr can find your files to extract.
       # Make sure this matches your Starr apps; the folder mount (/downloads or /data) should be identical.
-      - ${UNRAID_SHARE}:/share
+      - ${MEDIA_SHARE}:/share
       #- ${BASE_PATH}/unpackerr/config:/config
     restart: always
-    user: ${USER_ID}:${USER_ID} #Needs to run as 1000
+    user: 1000:1000 #Needs to run as 1000
     # What you see below are defaults for this compose. You only need to modify things specific to your environment.
     # Remove apps and feature configs you do not use or need. 
     # ie. Remove all lines that begin with UN_CMDHOOK, UN_WEBHOOK, UN_FOLDER, UN_WEBSERVER, and other apps you do not use.
