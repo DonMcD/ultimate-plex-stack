@@ -1,4 +1,4 @@
-# <img src="/UPS-Logo.png" alt="The Ultimate Plex Stack" width="32px"></img> The Ultimate Plex Stack!
+# <img src="/UPS-Logo.png" alt="The Ultimate Plex Stack" width="300px"></img> The Ultimate Plex Stack!
 
 Welcome to my Plex stack repository! This repository showcases my Docker Compose setup for managing various media-related services using Docker containers. The compose file is meant to be changed to each users liking as I know not everyone has the same requirements. Hope you enjoy!
 
