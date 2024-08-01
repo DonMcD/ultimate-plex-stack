@@ -361,4 +361,15 @@ services:
       #- UN_RADARR_0_PATHS_0=/share/downloads/movies
       - UN_RADARR_0_TIMEOUT=10s
       #- UN_RADARR_0_PATHS_0=/share/downloads/movies
+
+  # Used to sync Trash Guides config's to radarr and sonarr
+  # Only accessible via command line! No GUI
+  recyclarr:
+    image: ghcr.io/recyclarr/recyclarr
+    container_name: recyclarr
+    user: ${PUID}:${GUID}
+    volumes:
+      - ${BASE_PATH}/recyclarr/config:/config
+    environment:
+      - TZ=${TZ}
  
