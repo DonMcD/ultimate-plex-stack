@@ -1,4 +1,4 @@
-# The Ultimate Plex Stack!
+# <img src="/UPS-Logo.png" alt="The Ultimate Plex Stack" width="32px"></img> The Ultimate Plex Stack!
 
 Welcome to my Plex stack repository! This repository showcases my Docker Compose setup for managing various media-related services using Docker containers. The compose file is meant to be changed to each users liking as I know not everyone has the same requirements. Hope you enjoy!
 
@@ -26,6 +26,7 @@ This Plex Stack includes the following services:
 - **Wizarr:** Used to create links that can be sent to users so they can be invited to your media server.
 - **Plex Meta Manager:** Used to create collections, overlays, playlists and much more!
 - **Plex Auto Lanaguages:** Used to auto update the language of your Plex Tv episodes
+- **Recylarr:** Used to sync the config of trash guides with your arr stack
 
 <img width="353" alt="image" src="https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/a9b8faf8-072e-4fb3-ac18-2ffd29d0f760">
 
