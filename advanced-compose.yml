@@ -187,7 +187,7 @@ services:
       - WEBUI_PORT=8080
       - TORRENTING_PORT=8694 #Make sure to port forward this port in your router so you can seed more effectively
     volumes:
-      - ${BASE_PATH}/qbittorent/config:/config
+      - ${BASE_PATH}/qbittorrent/config:/config
       - ${MEDIA_SHARE}:/share
     restart: unless-stopped
       
