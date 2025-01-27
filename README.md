@@ -24,7 +24,6 @@ Currently you can choose from the **Basic** or the **Advanced** compose
 - **Overseerr:** Request management and monitoring for Plex.
 - **Qbittorrent:** BitTorrent client with VPN support.
 - **Tdarr:** Pre-transcodes your media to decrease file sizes
-- **De-unhealth:** Monitors VPN health and restarts Qbittorrent if necessary.
 - **Membarr:** Invite users to your Plex via discord
 - **Tautulli:** Analytics and monitoring for Plex.
 - **Bazarr:** Subtitle management for movies and TV shows.
