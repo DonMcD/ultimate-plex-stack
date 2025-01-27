@@ -1,5 +1,7 @@
 # Welcome to my Ultimate Plex Stack!
-
+#
+# Make sure to rename this file to "docker-compose.yaml" if you are using git clone
+#
 # I was hoping this could maybe help some people out when setting up their stack
 #
 # Environment Variable Examples:
