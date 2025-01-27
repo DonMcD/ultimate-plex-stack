@@ -37,8 +37,6 @@ Currently you can choose from the **Basic** or the **Advanced** compose
 - **Plex Auto Lanaguages:** Used to auto update the language of your Plex Tv episodes
 - **Recylarr:** Used to sync the config of trash guides with your arr stack
 
-<img width="353" alt="image" src="https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/a9b8faf8-072e-4fb3-ac18-2ffd29d0f760">
-
 
 ## Dependencies
 
