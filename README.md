@@ -2,16 +2,26 @@
 
 Welcome to my Plex stack repository! This repository showcases my Docker Compose setup for managing various media-related services using Docker containers. The compose file is meant to be changed to each users liking as I know not everyone has the same requirements. Hope you enjoy!
 
+Currently you can choose from the **Basic** or the **Advanced** compose
+
 ## Overview
 
-This Plex Stack includes the following services:
+**Basic Compose** Includes:
 
 - **Plex:** Media server for streaming movies and TV shows.
 - **Radarr:** Movie management and automation.
 - **Sonarr:** TV show management and automation.
 - **Prowlarr:** Indexer manager for Radarr and Sonarr.
 - **Overseerr:** Request management and monitoring for Plex.
-- **Gluetun:** VPN container with WireGuard support for secure browsing.
+- **Qbittorrent:** BitTorrent client with VPN support.
+
+**Advanced Compose** Includes:
+
+- **Plex:** Media server for streaming movies and TV shows.
+- **Radarr:** Movie management and automation.
+- **Sonarr:** TV show management and automation.
+- **Prowlarr:** Indexer manager for Radarr and Sonarr.
+- **Overseerr:** Request management and monitoring for Plex.
 - **Qbittorrent:** BitTorrent client with VPN support.
 - **Tdarr:** Pre-transcodes your media to decrease file sizes
 - **De-unhealth:** Monitors VPN health and restarts Qbittorrent if necessary.
