@@ -174,7 +174,7 @@ services:
       - 8191:8191
     restart: unless-stopped
       
-  #Qbittorent - torrenting software
+  #Qbittorrent - torrenting software
   #
   #You can also use RuTorrent, Transmisson or Deluge
   qbittorrent:
