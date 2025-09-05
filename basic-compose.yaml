@@ -15,7 +15,7 @@
 # https://trash-guides.info/Hardlinks/Hardlinks-and-Instant-Moves/ # This can be useful for establishing how the media will be presented below
 # MEDIA_SHARE = /mnt/media   # This can also be renamed to "SHARE", "MEDIA" or "DATA" this is where you will present your media
 #
-# NOTE: This is not a plug and play solution, some research / customization will be required to make this work as intented
+# NOTE: This is not a plug and play solution, some research / customization will be required to make this work as intended
 # Feel free to customize ie: remove/change/add containers as needed - one size does not fit all
 
 ---
@@ -88,7 +88,7 @@ services:
       - 9696:9696
     restart: unless-stopped
 
-  #Overseer - allows users to request media on their own
+  #Overseerr - allows users to request media on their own
   overseerr:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
@@ -97,14 +97,14 @@ services:
       - PGID=${GUID}
       - TZ=${TZ}
     volumes:
-      - ${BASE_PATH}/overseer/config:/config
+      - ${BASE_PATH}/overseerr/config:/config
       - ${MEDIA_SHARE}:/share #Access to the entire share
     ports:
       - 5055:5055
     restart: unless-stopped
       
   #Qbittorrent - torrenting software
-  #You can also use RuTorrent, Transmisson or Deluge
+  #You can also use RuTorrent, Transmission or Deluge
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
