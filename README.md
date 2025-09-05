@@ -48,10 +48,13 @@ Currently you can choose from the **Basic** or the **Advanced** compose
 
 1. Clone this repository / Copy the docker-compose.yml file:
 
-   ```bash
+   ```
    git clone https://github.com/DonMcD/ultimate-plex-stack.git
-2. Fill in the required details such as the environment variables
-3. OPTIONAL: Setup a reverse proxy so you can use radarr.my-domain.com instead of 192.168.1.10 to access each of your apps
+   ```
+2. Rename the advanced-compose or basic-compose to docker-compose.yml
+3. Fill in the required environment variables
+5. Then enter the command ``` docker compose up -d ```
+6. OPTIONAL: Setup a reverse proxy so you can use radarr.my-domain.com instead of 192.168..... to access each of your apps
 
 ## Example of Environment variables in Portainer
 Keep in mind some variable names have changed since this screenshot was taken
