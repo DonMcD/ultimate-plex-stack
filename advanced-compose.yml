@@ -13,7 +13,7 @@
 # https://trash-guides.info/Hardlinks/Hardlinks-and-Instant-Moves/ # This can be useful for establishing how the media will be presented below
 # MEDIA_SHARE = /mnt/media   # This can also be renamed to "SHARE" or "MEDIA" this is where you will present your media
 #
-# NOTE: This is not a plug and play solution, some research / customization will be required to make this work as intented
+# NOTE: This is not a plug and play solution, some research / customization will be required to make this work as intended
 # Feel free to customize ie: remove/change/add containers as needed - one size does not fit all
 
 ---
@@ -92,7 +92,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/readarr/config:/config
-      - ${MEDIA_SHARE}:/share 
+      - ${MEDIA_SHARE}:/share
 
     ports:
       - 8787:8787
@@ -108,7 +108,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/lidarr/config:/config
-      - ${MEDIA_SHARE}:/share 
+      - ${MEDIA_SHARE}:/share
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -176,7 +176,7 @@ services:
       
   #Qbittorrent - torrenting software
   #
-  #You can also use RuTorrent, Transmisson or Deluge
+  #You can also use RuTorrent, Transmission or Deluge
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
@@ -258,7 +258,7 @@ services:
     image: lscr.io/linuxserver/bazarr:latest
     restart: unless-stopped
     environment:
-      - PUID=${GUID}
+      - PUID=${PUID}
       - PGID=${GUID}
       - TZ=${TZ}
     volumes:
@@ -267,7 +267,7 @@ services:
     ports:
       - 6767:6767
       
-  #Plex Auto Languages - This switchs languages automatically example: watching english show and non english speaks you get subtitle lol
+  #Plex Auto Languages - This switches languages automatically example: watching english show and non english speaks you get subtitle lol
   plexautolanguages:
     image: remirigal/plex-auto-languages:latest
     container_name: plex-auto-languages
@@ -293,7 +293,7 @@ services:
       - "2468:2468" # you'll need this for daemon mode only
     volumes:
       - ${BASE_PATH}/cross-seed/config:/config #To configure you have to manually nano the config file
-      - ${BASE_PATH}/qbittorent/config/qBittorrent/BT_backup:/torrents:ro # your torrent clients .torrent cache, can and should be mounted read-only (e.g. qbit: `BT_Backup` | deluge: `state` | transmission: `transmission/torrents` | rtorrent: session dir from `.rtorrent.rc`)
+      - ${BASE_PATH}/qbittorrent/config/qBittorrent/BT_backup:/torrents:ro # your torrent clients .torrent cache, can and should be mounted read-only (e.g. qbit: `BT_Backup` | deluge: `state` | transmission: `transmission/torrents` | rtorrent: session dir from `.rtorrent.rc`)
       - ${MEDIA_SHARE}/cross-seed/current-cross-seeds:/cross-seeds # A place to temp save current cross seed .torrent files
       #- ${MEDIA_SHARE}/downloads:/data # OPTIONAL!!! this is dataDir path (for data-based matching) - will need to replicate your torrent client's container path (like Arr's do)
     command: daemon # this enables the search mode, change to daemon to specifically run the daemon
@@ -352,13 +352,13 @@ services:
       - TZ=${TZ}
       #- UN_DEBUG=true
       # Sonarr Config
-      - UN_SONARR_0_URL=http://${SERVER_IP}:7878
+      - UN_SONARR_0_URL=http://${SERVER_IP}:8989
       - UN_SONARR_0_API_KEY=${SONARR_KEY}
       #- UN_SONARR_0_PATHS_0=/share/downloads/tv
       - UN_SONARR_0_TIMEOUT=10s
       #- UN_SONARR_0_PATHS_0=/share/downloads/tv
       # Radarr Config
-      - UN_RADARR_0_URL=http://${SERVER_IP}:8989
+      - UN_RADARR_0_URL=http://${SERVER_IP}:7878
       - UN_RADARR_0_API_KEY=${RADARR_KEY}
       #- UN_RADARR_0_PATHS_0=/share/downloads/movies
       - UN_RADARR_0_TIMEOUT=10s
