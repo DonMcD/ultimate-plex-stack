@@ -1,6 +1,6 @@
 # <img src="/ultimate_plex_stack_trans.png" width="300px" alt="The Ultimate Plex Stack"></img>
 
-Welcome to my Plex stack repository! This repository showcases my Docker Compose setup for managing various media-related services using Docker containers. The compose file is meant to be changed to each users liking as I know not everyone has the same requirements. Hope you enjoy!
+Welcome to my stack repository! This repository showcases my docker compose setup for managing various media-related services using Docker containers. The compose file is meant to be modifed to each users liking as I know, not everyone has the same requirements. Hope you enjoy!
 
 Currently you can choose from the **Basic** or the **Advanced** compose
 
