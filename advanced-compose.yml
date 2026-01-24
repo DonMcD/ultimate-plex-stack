@@ -279,7 +279,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/pal/config:/config
-      
+    restart: unless-stopped
+
   #Cross Seed - used to take torrents from one tracker and seed them on another without leeching first. Increases ratio
   #
   #This is fairly advanced but can be removed if you don't think you will need it. Some trackers also don't allow this
@@ -321,7 +322,8 @@ services:
       - 5690:5690
     volumes:
       - ${BASE_PATH}/wizarr/data/database:/data/database
-      
+    restart: unless-stopped
+
   #Dozzle - Used to easily view logs of any container in real time!    
   dozzle:
     container_name: dozzle
@@ -330,7 +332,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 9999:8080
-    
+    restart: unless-stopped
+
   #Unpacker - Used to unzip zipped files
   unpackerr:
     image: golift/unpackerr
