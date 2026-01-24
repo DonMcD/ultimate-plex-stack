@@ -82,18 +82,17 @@ services:
       - 8989:8989
     restart: unless-stopped
   
-  #Readarr - Used to download books
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
+  #Bookshelf - Used to download books (Readarr fork, as Readarr has been retired)
+  bookshelf:
+    image: ghcr.io/pennydreadful/bookshelf:hardcover
+    container_name: bookshelf
     environment:
       - PUID=${PUID}
       - PGID=${GUID}
       - TZ=${TZ}
     volumes:
-      - ${BASE_PATH}/readarr/config:/config
+      - ${BASE_PATH}/bookshelf/config:/config
       - ${MEDIA_SHARE}:/share
-
     ports:
       - 8787:8787
     restart: unless-stopped
