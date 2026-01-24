@@ -189,8 +189,12 @@ services:
     volumes:
       - ${BASE_PATH}/qbittorrent/config:/config
       - ${MEDIA_SHARE}:/share
+    ports:
+      - 8080:8080      # WebUI
+      - 8694:8694      # Torrenting (TCP)
+      - 8694:8694/udp  # Torrenting (UDP)
     restart: unless-stopped
-      
+
   #Tautulli - for plex statistics. Very useful when troubleshooting performance issues
   tautulli:
     image: lscr.io/linuxserver/tautulli:latest
