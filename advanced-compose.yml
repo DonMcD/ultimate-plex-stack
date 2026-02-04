@@ -17,7 +17,7 @@
 # Feel free to customize ie: remove/change/add containers as needed - one size does not fit all
 
 ---
-version: "3.0"
+version: "3.8"
 
 networks: #This is used if you have a reverse proxy. I use Nginx Proxy Manager but anything will do
   proxy: #You can remove this block if you are not planning to use a vpn
@@ -199,7 +199,7 @@ services:
       - PGID=${GUID}
       - TZ=${TZ}
     volumes:
-      - ${BASE_PATH}/tautulli:/config
+      - ${BASE_PATH}/tautulli/config:/config
     networks:
       - proxy
     ports:
@@ -341,7 +341,7 @@ services:
       - ${MEDIA_SHARE}:/share
       #- ${BASE_PATH}/unpackerr/config:/config
     restart: always
-    user: 1000:1000 #Needs to run as 1000
+    user: ${PUID}:${GUID}
     # What you see below are defaults for this compose. You only need to modify things specific to your environment.
     # Remove apps and feature configs you do not use or need. 
     # ie. Remove all lines that begin with UN_CMDHOOK, UN_WEBHOOK, UN_FOLDER, UN_WEBSERVER, and other apps you do not use.

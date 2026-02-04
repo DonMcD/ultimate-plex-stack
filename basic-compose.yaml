@@ -19,7 +19,7 @@
 # Feel free to customize ie: remove/change/add containers as needed - one size does not fit all
 
 ---
-version: "3.0"
+version: "3.8"
 
 services:
   #Plex - used to display the media
