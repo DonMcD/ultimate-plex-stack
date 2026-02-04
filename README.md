@@ -57,6 +57,7 @@ Currently you can choose from the **Basic** or the **Advanced** compose
 6. OPTIONAL: Setup a reverse proxy so you can use radarr.my-domain.com instead of 192.168..... to access each of your apps
 
 ## Example of Environment variables in Portainer
+* Check the .env file for more examples
 Keep in mind some variable names have changed since this screenshot was taken
 <img width="657" alt="image" src="https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/9a614eb0-8ff7-4eb9-b154-61c08cd595e9">
 
