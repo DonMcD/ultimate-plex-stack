@@ -60,7 +60,7 @@ Currently you can choose from the **Basic** or the **Advanced** compose
 * Check the .env file for more examples
 
 <img width="657" alt="image" src="https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/9a614eb0-8ff7-4eb9-b154-61c08cd595e9">
-Keep in mind some variable names have changed since this screenshot was taken
+- Keep in mind some variable names have changed since this screenshot was taken
   
 File location examples:
 - {MEDIA_SHARE} = /share
