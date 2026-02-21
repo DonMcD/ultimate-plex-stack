@@ -81,36 +81,6 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
-  
-  #Bookshelf - Used to download books (Readarr fork, as Readarr has been retired)
-  bookshelf:
-    image: ghcr.io/pennydreadful/bookshelf:hardcover
-    container_name: bookshelf
-    environment:
-      - PUID=${PUID}
-      - PGID=${GUID}
-      - TZ=${TZ}
-    volumes:
-      - ${BASE_PATH}/bookshelf/config:/config
-      - ${MEDIA_SHARE}:/share
-    ports:
-      - 8787:8787
-    restart: unless-stopped
-    
-  #Lidarr - Used to download music 
-  lidarr:
-    image: lscr.io/linuxserver/lidarr:latest
-    container_name: lidarr
-    environment:
-      - PUID=${PUID}
-      - PGID=${GUID}
-      - TZ=${TZ}
-    volumes:
-      - ${BASE_PATH}/lidarr/config:/config
-      - ${MEDIA_SHARE}:/share
-    ports:
-      - 8686:8686
-    restart: unless-stopped
     
   #Prowlarr - manages your Sonarr, Radarr and download client
   prowlarr:
@@ -143,34 +113,23 @@ services:
       - 7474:7474
 
   #Overseer - allows users to request media on their own
-  overseerr:
-    image: lscr.io/linuxserver/overseerr:latest
-    container_name: overseerr
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    init: true
+    container_name: seerr
     environment:
+      - LOG_LEVEL=debug
       - PUID=${PUID}
       - PGID=${GUID}
       - TZ=${TZ}
+      - PORT=5055 #optional
     volumes:
-      - ${BASE_PATH}/overseer/config:/config
+      - ${BASE_PATH}/seer/config:/app/config
       - ${MEDIA_SHARE}:/share #Access to the entire share
     #networks:
     #  - proxy
     ports:
       - 5055:5055
-    restart: unless-stopped
-    
-  #Flaresolerr - Used as a proxy server to bypass Cloudflare and DDoS-GUARD protection.
-  flaresolverr:
-    # DockerHub mirror flaresolverr/flaresolverr:latest
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
-    environment:
-      - LOG_LEVEL=info
-      - LOG_HTML=false
-      - CAPTCHA_SOLVER=none
-      - TZ=${TZ}
-    ports:
-      - 8191:8191
     restart: unless-stopped
       
   #Qbittorrent - torrenting software
@@ -240,20 +199,6 @@ services:
       - /transcode_cache:/temp
     devices:
      - /dev/dri:/dev/dri #Required for HW transcoding / QuickSync
-     
-  #Membarr - to invite users via discord
-  #
-  #Can be configured so that when a plex member invites an outside user to a discord channel they are auto invited to plex
-  #
-  #Feel free to remove this container if you want to manually invite everyone yourself
-  membarr:
-    container_name: membarr
-    image: yoruio/membarr:latest
-    restart: unless-stopped
-    environment:
-      - token=${MEMBARR_TOKEN}
-    volumes:
-      - ${BASE_PATH}/membarr/config:/app/app/config
       
   #Bazarr - for subtitles. Try to use SRT format if you can rather than PGS due to performance issues
   bazarr:
@@ -302,21 +247,6 @@ services:
       #- ${MEDIA_SHARE}/downloads:/data # OPTIONAL!!! this is dataDir path (for data-based matching) - will need to replicate your torrent client's container path (like Arr's do)
     command: daemon # this enables the search mode, change to daemon to specifically run the daemon
     
-  #Plex Meta Manager - used to create collections in plex. Example: "Most Popular Movies This Week", "Best of horror", etc.
-  plex-meta-manager:
-    image: meisnate12/plex-meta-manager
-    container_name: plex-meta-manager
-    environment:
-      - TZ=${TZ}
-      #- PMM_OVERLAYS_ONLY=true #Tells PMM to run overlays only
-      - PMM_CONFIG=/config/config.yml
-      - PMM_RUN=true #Runs PMM Immediately
-      #- PMM_RUN_LIBRARIES=Movies #Tells PMM to process only a library called "Movies"
-    volumes:
-      - ${BASE_PATH}/plex-meta-manager/config:/config
-      
-    restart: unless-stopped
-    
   #Wizarr - Allows you to create a share link that you can send to users to invite them to your media server
   wizarr:
     container_name: wizarr
@@ -327,21 +257,10 @@ services:
       - ${BASE_PATH}/wizarr/data/database:/data/database
     restart: unless-stopped
 
-  #Dozzle - Used to easily view logs of any container in real time!    
-  dozzle:
-    container_name: dozzle
-    image: amir20/dozzle:latest
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 9999:8080
-    restart: unless-stopped
-
   #Unpacker - Used to unzip zipped files
   unpackerr:
     image: golift/unpackerr
     container_name: unpackerr
-
     volumes:
       # You need at least this one volume mapped so Unpackerr can find your files to extract.
       # Make sure this matches your Starr apps; the folder mount (/downloads or /data) should be identical.
@@ -370,14 +289,3 @@ services:
       - UN_RADARR_0_TIMEOUT=10s
       #- UN_RADARR_0_PATHS_0=/share/downloads/movies
 
-  # Used to sync Trash Guides config's to radarr and sonarr
-  # Only accessible via command line! No GUI
-  recyclarr:
-    image: ghcr.io/recyclarr/recyclarr
-    container_name: recyclarr
-    user: ${PUID}:${GUID}
-    volumes:
-      - ${BASE_PATH}/recyclarr/config:/config
-    environment:
-      - TZ=${TZ}
- 
