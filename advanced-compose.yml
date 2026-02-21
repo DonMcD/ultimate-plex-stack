@@ -69,8 +69,6 @@ services:
     volumes:
       - ${BASE_PATH}/sonarr/config:/config
       - ${MEDIA_SHARE}:/data #Access to the entire share
-    #networks: #Does not connect to overseer if you use NPM
-    #  - proxy
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -85,8 +83,6 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/prowlarr/config:/config
-    #networks:
-    #  - proxy
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -119,8 +115,6 @@ services:
     volumes:
       - ${BASE_PATH}/seer/config:/app/config
       - ${MEDIA_SHARE}:/data #Access to the entire share
-    #networks:
-    #  - proxy
     ports:
       - 5055:5055
     restart: unless-stopped
@@ -156,39 +150,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/tautulli/config:/config
-    #networks:
-    #  - proxy
     ports:
       - 8181:8181
-    restart: unless-stopped
-
-  #Bazarr - for subtitles. Try to use SRT format if you can rather than PGS due to performance issues
-  bazarr:
-    container_name: bazarr
-    image: lscr.io/linuxserver/bazarr:latest
-    restart: unless-stopped
-    environment:
-      - PUID=${PUID}
-      - PGID=${GUID}
-      - TZ=${TZ}
-    volumes:
-      - ${BASE_PATH}/bazarr/config:/config
-      - ${MEDIA_SHARE}:/data
-    ports:
-      - 6767:6767
-      
-  #Plex Auto Languages - This switches languages automatically example: watching english show and non english speaks you get subtitle lol
-  plexautolanguages:
-    image: remirigal/plex-auto-languages:latest
-    container_name: plex-auto-languages
-    environment:
-      - PLEX_URL=${PLEX_URL} #This is your local URl example: http://192.168.1.10:32400
-      #To find your plex token go to https://app.plex.tv/, go to your library, click on the 3 dots on the bottom right of one of your tv/movie posters
-      #Then click "View XML" in the bottom right of that popup, look at the URL of the XML window and find your X-Plex-Token= in the URL (at the very end)
-      - PLEX_TOKEN=${PLEX_TOKEN}
-      - TZ=${TZ}
-    volumes:
-      - ${BASE_PATH}/pal/config:/config
     restart: unless-stopped
     
   #Wizarr - Allows you to create a share link that you can send to users to invite them to your media server
