@@ -8,10 +8,10 @@
 # PUID = 99
 # GUID = 101
 # TZ = America/Edmonton
-# BASE_PATH = /home/username/docker
+# BASE_PATH = /home/username/docker # This is where you docker containers will store their data for each application
 #
 # https://trash-guides.info/Hardlinks/Hardlinks-and-Instant-Moves/ # This can be useful for establishing how the media will be presented below
-# MEDIA_SHARE = /mnt/media   # This can also be renamed to "SHARE" or "MEDIA" this is where you will present your media
+# MEDIA_SHARE = /mnt/data  # This is where your media files will live
 #
 # NOTE: This is not a plug and play solution, some research / customization will be required to make this work as intended
 # Feel free to customize ie: remove/change/add containers as needed - one size does not fit all
