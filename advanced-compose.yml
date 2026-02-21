@@ -18,11 +18,6 @@
 
 ---
 version: "3.8"
-
-networks: #This is used if you have a reverse proxy. I use Nginx Proxy Manager but anything will do
-  proxy: #You can remove this block if you are not planning to use a vpn
-    external:
-      name: proxy
       
 services:
   #Plex - used to display the media
@@ -58,9 +53,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/radarr/config:/config
-      - ${MEDIA_SHARE}:/share #Access to the entire share
-    #networks: #Does not connect to overseer if you use NPM
-    #  - proxy
+      - ${MEDIA_SHARE}:/data #Access to the entire share
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -75,7 +68,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/sonarr/config:/config
-      - ${MEDIA_SHARE}:/share #Access to the entire share
+      - ${MEDIA_SHARE}:/data #Access to the entire share
     #networks: #Does not connect to overseer if you use NPM
     #  - proxy
     ports:
@@ -125,7 +118,7 @@ services:
       - PORT=5055 #optional
     volumes:
       - ${BASE_PATH}/seer/config:/app/config
-      - ${MEDIA_SHARE}:/share #Access to the entire share
+      - ${MEDIA_SHARE}:/data #Access to the entire share
     #networks:
     #  - proxy
     ports:
@@ -146,7 +139,7 @@ services:
       - TORRENTING_PORT=8694 #Make sure to port forward this port in your router so you can seed more effectively
     volumes:
       - ${BASE_PATH}/qbittorrent/config:/config
-      - ${MEDIA_SHARE}:/share
+      - ${MEDIA_SHARE}:/data
     ports:
       - 8080:8080      # WebUI
       - 8694:8694      # Torrenting (TCP)
@@ -169,37 +162,6 @@ services:
       - 8181:8181
     restart: unless-stopped
 
-  #Tdarr - to transcode videos from one format to another like x265 or H.265
-  #
-  #This container requires a decent amount of horse power to run but will save space in the long run
-  tdarr:
-    container_name: tdarr
-    image: ghcr.io/haveagitgat/tdarr:latest
-    restart: unless-stopped
-    ports:
-      - 8265:8265 # webUI port
-      - 8266:8266 # server port
-    environment:
-      - TZ=${TZ}
-      - PUID=${PUID}
-      - PGID=${GUID}
-      - UMASK_SET=002
-      - nodeName=ServerNode
-      - serverIP=0.0.0.0
-      - serverPort=8266
-      - webUIPort=8265
-      - internalNode=true
-      - inContainer=true
-      - ffmpegVersion=6
-    volumes:
-      - ${BASE_PATH}/tdarr/server:/app/server
-      - ${BASE_PATH}/tdarr/configs:/app/configs
-      - ${BASE_PATH}/tdarr/logs:/app/logs
-      - ${MEDIA_SHARE}:/media
-      - /transcode_cache:/temp
-    devices:
-     - /dev/dri:/dev/dri #Required for HW transcoding / QuickSync
-      
   #Bazarr - for subtitles. Try to use SRT format if you can rather than PGS due to performance issues
   bazarr:
     container_name: bazarr
@@ -211,7 +173,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/bazarr/config:/config
-      - ${MEDIA_SHARE}:/share
+      - ${MEDIA_SHARE}:/data
     ports:
       - 6767:6767
       
@@ -228,24 +190,6 @@ services:
     volumes:
       - ${BASE_PATH}/pal/config:/config
     restart: unless-stopped
-
-  #Cross Seed - used to take torrents from one tracker and seed them on another without leeching first. Increases ratio
-  #
-  #This is fairly advanced but can be removed if you don't think you will need it. Some trackers also don't allow this
-  cross-seed:
-    image: ghcr.io/cross-seed/cross-seed
-    container_name: cross-seed
-    environment:
-      - PUID=${PUID}
-      - PGID=${GUID}
-    ports:
-      - "2468:2468" # you'll need this for daemon mode only
-    volumes:
-      - ${BASE_PATH}/cross-seed/config:/config #To configure you have to manually nano the config file
-      - ${BASE_PATH}/qbittorrent/config/qBittorrent/BT_backup:/torrents:ro # your torrent clients .torrent cache, can and should be mounted read-only (e.g. qbit: `BT_Backup` | deluge: `state` | transmission: `transmission/torrents` | rtorrent: session dir from `.rtorrent.rc`)
-      - ${MEDIA_SHARE}/cross-seed/current-cross-seeds:/cross-seeds # A place to temp save current cross seed .torrent files
-      #- ${MEDIA_SHARE}/downloads:/data # OPTIONAL!!! this is dataDir path (for data-based matching) - will need to replicate your torrent client's container path (like Arr's do)
-    command: daemon # this enables the search mode, change to daemon to specifically run the daemon
     
   #Wizarr - Allows you to create a share link that you can send to users to invite them to your media server
   wizarr:
@@ -256,36 +200,4 @@ services:
     volumes:
       - ${BASE_PATH}/wizarr/data/database:/data/database
     restart: unless-stopped
-
-  #Unpacker - Used to unzip zipped files
-  unpackerr:
-    image: golift/unpackerr
-    container_name: unpackerr
-    volumes:
-      # You need at least this one volume mapped so Unpackerr can find your files to extract.
-      # Make sure this matches your Starr apps; the folder mount (/downloads or /data) should be identical.
-      - ${MEDIA_SHARE}:/share
-      #- ${BASE_PATH}/unpackerr/config:/config
-    restart: always
-    user: ${PUID}:${GUID}
-    # What you see below are defaults for this compose. You only need to modify things specific to your environment.
-    # Remove apps and feature configs you do not use or need. 
-    # ie. Remove all lines that begin with UN_CMDHOOK, UN_WEBHOOK, UN_FOLDER, UN_WEBSERVER, and other apps you do not use.
-    environment:
-      - UN_START_DELAY=1m
-      #- UMASK=002
-      - TZ=${TZ}
-      #- UN_DEBUG=true
-      # Sonarr Config
-      - UN_SONARR_0_URL=http://${SERVER_IP}:8989
-      - UN_SONARR_0_API_KEY=${SONARR_KEY}
-      #- UN_SONARR_0_PATHS_0=/share/downloads/tv
-      - UN_SONARR_0_TIMEOUT=10s
-      #- UN_SONARR_0_PATHS_0=/share/downloads/tv
-      # Radarr Config
-      - UN_RADARR_0_URL=http://${SERVER_IP}:7878
-      - UN_RADARR_0_API_KEY=${RADARR_KEY}
-      #- UN_RADARR_0_PATHS_0=/share/downloads/movies
-      - UN_RADARR_0_TIMEOUT=10s
-      #- UN_RADARR_0_PATHS_0=/share/downloads/movies
 
