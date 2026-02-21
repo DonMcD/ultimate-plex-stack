@@ -21,21 +21,14 @@ Currently you can choose from the **Basic** or the **Advanced** compose
 - **Radarr:** Movie management and automation.
 - **Sonarr:** TV show management and automation.
 - **Prowlarr:** Indexer manager for Radarr and Sonarr.
-- **Overseerr:** Request management and monitoring for Plex.
+- **Seerr:** Request management and monitoring for Plex.
 - **Qbittorrent:** BitTorrent client with VPN support.
 - **Tdarr:** Pre-transcodes your media to decrease file sizes
-- **Membarr:** Invite users to your Plex via discord
 - **Tautulli:** Analytics and monitoring for Plex.
 - **Bazarr:** Subtitle management for movies and TV shows.
 - **Autobrr:** Used to grab torrents immediately as they are released.
-- **Readarr:** Used to grab books and audiobooks.
-- **Lidarr:** Used to grab music.
-- **Flaresolverr:** Used as a proxy server to bypass Cloudflare and DDoS-GUARD protection.
-- **Dozzle:** Used to view the logs of any container.
 - **Wizarr:** Used to create links that can be sent to users so they can be invited to your media server.
-- **Plex Meta Manager:** Used to create collections, overlays, playlists and much more!
 - **Plex Auto Lanaguages:** Used to auto update the language of your Plex Tv episodes
-- **Recylarr:** Used to sync the config of trash guides with your arr stack
 
 
 ## Dependencies
