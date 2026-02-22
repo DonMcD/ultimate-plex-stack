@@ -19,7 +19,7 @@ Currently you can choose from the **Basic** or the **Advanced** compose
 - **Wizarr:** Used to create links that can be sent to users so they can be invited to your media server.
 
 ## Tutorial Video
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Uot_rs8qz2g?si=7wmMFQcWwiJg10Io" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[Watch my step-by-step tutorial on Youtube](https://www.youtube.com/watch?v=Uot_rs8qz2g)
 
 ## Dependencies
 
