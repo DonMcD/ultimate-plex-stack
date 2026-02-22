@@ -18,6 +18,13 @@ Currently you can choose from the **Basic** or the **Advanced** compose
 - **Autobrr:** Used to grab torrents immediately as they are released.
 - **Wizarr:** Used to create links that can be sent to users so they can be invited to your media server.
 
+## Tutorial
+<p align="center">
+  <a href="https://youtu.be/Uot_rs8qz2g?si=7wmMFQcWwiJg10Io">
+    <img src="https://youtu.be/Uot_rs8qz2g?si=7wmMFQcWwiJg10Io/maxresdefault.jpg" alt="Tutorial Video" style="width:100%;">
+  </a>
+</p>
+
 ## Dependencies
 
 1. Linux
