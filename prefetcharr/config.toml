@@ -1,0 +1,17 @@
+interval = 900           # Polling interval in seconds
+log_dir = "/log"         # Logging directory
+log_level = "Debug"      # `Trace`, `Debug`, `Info`, `Warn` or `Error`
+prefetch_num = 2         # Number of episodes to make available in advance
+request_seasons = true   # Always request full seasons to prefer season packs
+connection_retries = 6   # Number of retries for the initial connection probing
+
+[media_server]
+type = "Plex" # Plex OR Jellyfin
+url = "http://192.168.1.2:32400" # Change this to your media server IP address
+api_key = "yyyuJmZjRvMuSeXxzXuk" # Use your own api key
+# users = [ "John", "12345", "Axel F" ] # Optional: Only monitor sessions for specific user IDs or names
+# libraries = [ "TV Shows", "Anime" ]   # Optional: Only monitor sessions for specific libraries
+
+[sonarr]
+url = "http://192.168.1.2:8989" # Sonarr baseurl
+api_key = "gSfF32Ivh1p1Lj4LJbEDNMmN8x6L79Sp"       # Sonarr API key
