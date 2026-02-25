@@ -164,3 +164,9 @@ services:
       - ${BASE_PATH}/wizarr/data/database:/data/database
     restart: unless-stopped
 
+  prefetcharr:
+    image: phueber/prefetcharr:latest
+    container_name: prefetcharr
+    volumes:
+    - ${BASE_PATH}/prefetcharr/config.toml:/config
+    - ${BASE_PATH}/prefetcharr/logs:/log
