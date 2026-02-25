@@ -15,6 +15,7 @@ Welcome to my stack repository! This repository showcases my docker compose setu
 - **Tautulli:** Analytics and monitoring for Plex.
 - **Autobrr:** Used to grab torrents immediately as they are released.
 - **Wizarr:** Used to create links that can be sent to users so they can be invited to your media server.
+- **Prefetcharr:** Automatically download the next episode in the series.
 
 ## Tutorial Video
 [Watch my step-by-step tutorial on Youtube](https://www.youtube.com/watch?v=Uot_rs8qz2g)
