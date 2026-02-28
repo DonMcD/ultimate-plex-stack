@@ -49,7 +49,7 @@ Welcome to my media stack repository! This repository showcases my docker compos
 To allow hardlinking to work (which you will definitely want!) you will have to use the same root folder in all of your container paths. In this example we use "/data", so in the container, the path will look like "/data/downloads/tv"
 
 ## Example of the Folder Structure (Required for Hardlinking):  
-<img width="902" height="440" alt="image" src="https://github.com/user-attachments/assets/4ae596da-cda8-452c-aaa4-431cc10b5da8" />
+<img width="902" height="440" alt="image" src="https://github.com/user-attachments/assets/4ae596da-cda8-452c-aaa4-431cc10b5da8" />\
 
 *Anytime you reference a storage location you will always use ```/data/media/movies``` or ```/data/downloads/movies``` not just ```/movies```
   
