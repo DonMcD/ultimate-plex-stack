@@ -1,4 +1,4 @@
-# <img src="/ultimate_plex_stack_transparent_bg.png" width="300px" alt="The Ultimate Plex Stack"></img>
+<img width="1546" height="294" alt="env_example_photo" src="https://github.com/user-attachments/assets/6eecc693-37d0-4d37-a4bf-f880fd19bbc8" /># <img src="/ultimate_plex_stack_transparent_bg.png" width="300px" alt="The Ultimate Plex Stack"></img>
 
 Welcome to my stack repository! This repository showcases my docker compose setup for managing various media-related services using Docker containers. The compose file is meant to be modifed to each users liking as I know, not everyone has the same requirements. Hope you enjoy!
 
@@ -39,7 +39,7 @@ Welcome to my stack repository! This repository showcases my docker compose setu
 ## Example of Environment variables in Portainer
 * Check the .env file for more examples
 
-<img width="657" alt="image" src="https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/9a614eb0-8ff7-4eb9-b154-61c08cd595e9">
+<img width="1546" height="294" alt="env_example_photo" src="https://github.com/user-attachments/assets/03b7d5d0-ac8f-425d-9cf4-7fe08d9e9e9d" />
 
 Keep in mind some variable names have changed since this screenshot was taken
   
