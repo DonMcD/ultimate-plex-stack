@@ -48,8 +48,9 @@ Welcome to my stack repository! This repository showcases my docker compose setu
 
 To allow hardlinking to work (which you will definitely want!) you will have to use the same root folder in all of your container path. In this example we use "/data", so in the container it will look like "/data/downloads/tv"
 
-An example of my folder structure:  
-![image](https://github.com/DonMcD/ultimate-plex-stack/assets/90471623/2003ac26-a929-4ff6-ad67-e35fc51fb51a)
+## Example of the Folder Structure:  
+<img width="902" height="440" alt="image" src="https://github.com/user-attachments/assets/4ae596da-cda8-452c-aaa4-431cc10b5da8" />
+
   
 - Feel free to expand your folders to also include "books" or "music" as you need for your setup
   
