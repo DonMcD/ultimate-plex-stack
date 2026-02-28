@@ -56,10 +56,15 @@ To allow hardlinking to work (which you will definitely want!) you will have to 
 - Feel free to expand your folders to also include "books" or "music" as you need for your setup
 
 ## Setting File Permissions
-Use ``` sudo chmod 777 -R /data ``` or ``` sudo chmod 777 -R /home/donny/appdata ``` to open your permissions up and allow the docker containers to interact with your folder structure
+Use ``` sudo chmod 777 -R /data ``` and ``` sudo chmod 777 -R /home/donny/appdata ``` to open your permissions up and allow the docker containers to interact with your folders.
 
-1. In Radarr you will want to set your category to "movies", this will create the movies folder
-2. In Sonarr you will want to set your category to "tv", this will create the tv folder
+## Tips
+1. In Radarr you will want to set your category to "movies" under the "Add Download Client" menu.
+<img width="682" height="299" alt="image" src="https://github.com/user-attachments/assets/97f59073-a3ae-4d59-88f6-4ccb58c550e4" />
+
+2. In Sonarr you will want to set your category to "tv" under the "Add Download Client" menu.
+<img width="683" height="230" alt="image" src="https://github.com/user-attachments/assets/b48577db-241d-48c6-912d-26e5edd0371f" />
+
 
   
 Anytime you reference your media folder in a container you want the path to look like /share/media/tv instead of /tv like a lot of the default guides say, if you do end up mapping the path as /tv hardlinking will not work
