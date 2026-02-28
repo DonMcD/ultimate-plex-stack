@@ -1,3 +1,5 @@
+<img width="780" height="439" alt="image" src="https://github.com/user-attachments/assets/c791abbc-8503-4cd6-af4c-e5ad842deb78" />
+
 Welcome to my stack repository! This repository showcases my docker compose setup for managing various media-related services using Docker containers. The compose file is meant to be modifed to each users liking as I know, not everyone has the same requirements. Hope you enjoy!
 
 ## Overview
