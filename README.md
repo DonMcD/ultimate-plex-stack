@@ -43,7 +43,7 @@ Welcome to my media stack repository! This repository showcases my docker compos
 
   
 ## File Locations
-- {MEDIA_SHARE} = /data (Right in the root folder of your OS)
+- {MEDIA_SHARE} = /data
 - {BASE_PATH} = /home/{username}/appdata
 
 To allow hardlinking to work (which you will definitely want!) you will have to use the same root folder in all of your container path. In this example we use "/data", so in the container it will look like "/data/downloads/tv"
