@@ -42,7 +42,7 @@ Welcome to my stack repository! This repository showcases my docker compose setu
 <img width="1546" height="294" alt="env_example_photo" src="https://github.com/user-attachments/assets/03b7d5d0-ac8f-425d-9cf4-7fe08d9e9e9d" />
 
   
-File location examples:
+## File Locations
 - {MEDIA_SHARE} = /data
 - {BASE_PATH} = /home/{username}/docker
 
