@@ -1,5 +1,3 @@
-<img width="1546" height="294" alt="env_example_photo" src="https://github.com/user-attachments/assets/6eecc693-37d0-4d37-a4bf-f880fd19bbc8" /># <img src="/ultimate_plex_stack_transparent_bg.png" width="300px" alt="The Ultimate Plex Stack"></img>
-
 Welcome to my stack repository! This repository showcases my docker compose setup for managing various media-related services using Docker containers. The compose file is meant to be modifed to each users liking as I know, not everyone has the same requirements. Hope you enjoy!
 
 ## Overview
