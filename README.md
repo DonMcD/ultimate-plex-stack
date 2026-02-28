@@ -43,7 +43,7 @@ Welcome to my stack repository! This repository showcases my docker compose setu
 
   
 ## File Locations
-- {MEDIA_SHARE} = /data
+- {MEDIA_SHARE} = /data (Right in the root folder of your OS)
 - {BASE_PATH} = /home/{username}/appdata
 
 To allow hardlinking to work (which you will definitely want!) you will have to use the same root folder in all of your container path. In this example we use "/data", so in the container it will look like "/data/downloads/tv"
@@ -53,8 +53,10 @@ To allow hardlinking to work (which you will definitely want!) you will have to 
 *Anytime you reference a storage location you will always use ```/data/media/movies``` or ```/data/downloads/movies``` not just ```/movies```
   
 - Feel free to expand your folders to also include "books" or "music" as you need for your setup
-  
-  
+
+## Setting File Permissions
+Use ``` sudo chmod 777 -R /data ``` or ``` sudo chmod 777 -R /home/donny/appdata ``` to open your permissions up and allow the docker containers to interact with your folder structure
+
 1. In Radarr you will want to set your category to "movies", this will create the movies folder
 2. In Sonarr you will want to set your category to "tv", this will create the tv folder
 
