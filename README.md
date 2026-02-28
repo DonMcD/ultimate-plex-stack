@@ -56,7 +56,7 @@ To allow hardlinking to work (which you will definitely want!) you will have to 
 - Feel free to expand your folders to also include "books" or "music" as you need for your setup
 
 ## Setting File Permissions
-Use ``` sudo chmod 777 -R /data ``` and ``` sudo chmod 777 -R /home/donny/appdata ``` to open your permissions up and allow the docker containers to interact with your folders.
+Use ``` sudo chmod 777 -R /data ``` and ``` sudo chmod 777 -R /home/{YourUsername}/appdata ``` to open your permissions up and allow the docker containers to interact with your folders.
 
 ## Tips
 1. In Radarr you will want to set your category to "movies" under the "Add Download Client" menu.
