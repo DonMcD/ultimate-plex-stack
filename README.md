@@ -65,6 +65,9 @@ Use ``` sudo chmod 777 -R /data ``` and ``` sudo chmod 777 -R /home/donny/appdat
 2. In Sonarr you will want to set your category to "tv" under the "Add Download Client" menu.
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/b48577db-241d-48c6-912d-26e5edd0371f" />
 
+3. In qBittorrent you want to make sure your settings match the ones shown below
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/d991fab2-4dd2-4c8f-a081-3607883f0a2a" />
+
 
   
 Anytime you reference your media folder in a container you want the path to look like /share/media/tv instead of /tv like a lot of the default guides say, if you do end up mapping the path as /tv hardlinking will not work
