@@ -40,8 +40,6 @@ Welcome to my stack repository! This repository showcases my docker compose setu
 * Check the .env file for more examples
 
 <img width="1546" height="294" alt="env_example_photo" src="https://github.com/user-attachments/assets/03b7d5d0-ac8f-425d-9cf4-7fe08d9e9e9d" />
-
-Keep in mind some variable names have changed since this screenshot was taken
   
 File location examples:
 - {MEDIA_SHARE} = /data
