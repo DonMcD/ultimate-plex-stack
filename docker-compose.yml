@@ -126,19 +126,19 @@ services:
     cap_add:
       - NET_ADMIN
     environment:
-      - PUID=0 # Required
-      - PGID=0 # Required
+      - PUID=0 # Required | Leave 0 because this container requires admin priviledges
+      - PGID=0 # Required | Leave 0 because this container requires admin priviledges
       - UMASK=000 # Required
       - TZ=${TZ} # Required
       - WEBUI_PORT=8080 # Required, default 8080
-      - VPN_ENABLED=yes # Required
+      - VPN_ENABLED=yes # Required | yes or no
       - VPN_USER=p1234567 # Optional if VPN_ENABLED=no
       - VPN_PASS=fI348rW8zT # Optional if VPN_ENABLED=no
       - VPN_PROV=pia # Optional if VPN_ENABLED=no | Private Internet Access is the best VPN, I suggest using it because it supports port forwarding 
       - VPN_CLIENT=wireguard # Optional if VPN_ENABLED=no | Can be wireguard or openvpn
       - STRICT_PORT_FORWARD=yes # Optional if VPN_ENABLED=no | Allow port forwarding via vpn? Yes
       - LAN_NETWORK=192.168.1.0/24 # Change this to your local network
-      - ENABLE_STARTUP_SCRIPTS=no
+      - ENABLE_STARTUP_SCRIPTS=no # Optional | yes or no
       - NAME_SERVERS=1.1.1.1,1.0.0.1 
       - ENABLE_PRIVOXY=yes
     sysctls:
