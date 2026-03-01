@@ -118,26 +118,43 @@ services:
     ports:
       - 5055:5055
     restart: unless-stopped
-      
-  #Qbittorrent - torrenting software
-  #
-  #You can also use RuTorrent, Transmission or Deluge
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
+    
+  qbit-vpn:
+    image: binhex/arch-qbittorrentvpn:latest
+    container_name: qbit-vpn
+    network_mode: bridge
+    cap_add:
+      - NET_ADMIN
     environment:
-      - PUID=${PUID}
-      - PGID=${GUID}
-      - TZ=${TZ}
-      - WEBUI_PORT=8080
-      - TORRENTING_PORT=8694 #Make sure to port forward this port in your router so you can seed more effectively
+      - PUID=0 # Required
+      - PGID=0 # Required
+      - UMASK=000 # Required
+      - TZ=${TZ} # Required
+      - WEBUI_PORT=8080 # Required, default 8080
+      - VPN_ENABLED=yes # Required
+      - VPN_USER=p1234567 # Optional if VPN_ENABLED=no
+      - VPN_PASS=fI348rW8zT # Optional if VPN_ENABLED=no
+      - VPN_PROV=pia # Optional if VPN_ENABLED=no | Private Internet Access is the best VPN, I suggest using it because it supports port forwarding 
+      - VPN_CLIENT=wireguard # Optional if VPN_ENABLED=no | Can be wireguard or openvpn
+      - STRICT_PORT_FORWARD=yes # Optional if VPN_ENABLED=no | Allow port forwarding via vpn? Yes
+      - LAN_NETWORK=192.168.1.0/24 # Change this to your local network
+      - ENABLE_STARTUP_SCRIPTS=no
+      - NAME_SERVERS=1.1.1.1,1.0.0.1 
+      - ENABLE_PRIVOXY=yes
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1 # Required if using wireguard
+    privileged: true # Required if using wireguard
+    ports:
+      - 8080:8080      # WebUI
+      - 8118:8118      # Privoxy
+      - 58946:58946     # Torrenting (TCP)
+      - 58946:58946/udp  # Torrenting (UDP)
+    devices:
+      - /dev/dri:/dev/dri #Required for plex HW transcoding / QuickSync
     volumes:
       - ${BASE_PATH}/qbittorrent/config:/config
       - ${MEDIA_SHARE}:/data
-    ports:
-      - 8080:8080      # WebUI
-      - 8694:8694      # Torrenting (TCP)
-      - 8694:8694/udp  # Torrenting (UDP)
+      - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
 
   #Tautulli - for plex statistics. Very useful when troubleshooting performance issues
