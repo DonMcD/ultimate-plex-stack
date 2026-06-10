@@ -58,9 +58,6 @@ To allow hardlinking to work (which you will definitely want!) you will have to 
 ## Setting File Permissions
 Use ``` sudo chmod 777 -R /data ``` and ``` sudo chmod 777 -R /home/{YourUsername}/appdata ``` to open your permissions up and allow the docker containers to interact with your folders.
 
-## Still have questions? Join the Discord!
-[Click here to join the discord](https://discord.gg/5n5tDRarNP)
-
 ## Tips
 1. In Radarr you will want to set your category to "movies" under the "Add Download Client" menu.
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/2340bec1-cf7b-4b7f-a599-0a63dcb65308" />
@@ -71,4 +68,6 @@ Use ``` sudo chmod 777 -R /data ``` and ``` sudo chmod 777 -R /home/{YourUsernam
 3. In qBittorrent you want to make sure your settings match the ones shown below
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/d991fab2-4dd2-4c8f-a081-3607883f0a2a" />
 
+## Still have questions? Join the Discord!
+[![discord_ico](https://cdn3.emoji.gg/emojis/9738-discord-ico.png)](https://emoji.gg/emoji/9738-discord-ico)[Click here to join the discord](https://discord.gg/5n5tDRarNP)
 
