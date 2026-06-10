@@ -69,5 +69,5 @@ Use ``` sudo chmod 777 -R /data ``` and ``` sudo chmod 777 -R /home/{YourUsernam
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/d991fab2-4dd2-4c8f-a081-3607883f0a2a" />
 
 ## Still have questions? Join the Discord!
-[![discord_ico](https://cdn3.emoji.gg/emojis/9738-discord-ico.png)](https://emoji.gg/emoji/9738-discord-ico)[Click here to join the discord](https://discord.gg/5n5tDRarNP)
+<a href="https://emoji.gg/emoji/9738-discord-ico"><img src="https://cdn3.emoji.gg/emojis/9738-discord-ico.png" width="32px" height="32px" alt="discord_ico"></a>[Click here to join the discord](https://discord.gg/5n5tDRarNP)
 
