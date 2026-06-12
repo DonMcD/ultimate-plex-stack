@@ -71,6 +71,6 @@ Use ``` sudo chmod 777 -R /data ``` and ``` sudo chmod 777 -R /home/{YourUsernam
 ## Still have questions? Join the Discord!
 <a href="https://discord.gg/5n5tDRarNP"><img src="https://cdn3.emoji.gg/emojis/9738-discord-ico.png" width="64px" height="64px" alt="discord_ico"></a>
 
-## Support Me!
+## Support Me! Buy Me A Coffee
 <a href="https://ko-fi.com/donavonmcdowell"><img src="https://storage.ko-fi.com/cdn/useruploads/post/aab9d56e-b1a0-407c-8c37-5600fc8ab906_ko-ficircle.png" width="64px" height="64px" alt="ko-fi_ico"></a>
 
